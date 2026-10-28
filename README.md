@@ -242,10 +242,7 @@ Documenting problems is an important part of the project.
 
 ## Problem 1. Pinging from Other VMS (Kali, Android) to Windows 10 VM fail
 
-After manually configuring the IPv4 settings, at first 
-```bash
-sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
-```
+After manually configuring the IPv4 settings, at first pinging to windows 10 VM was fail which was due to the issue that by default windows 10  ICMP echoes was set to be disable on the (Windows Defender Firewall with  Advance security)  
 
 The network connection was then restarted/rebooted and connectivity was tested again.
 
