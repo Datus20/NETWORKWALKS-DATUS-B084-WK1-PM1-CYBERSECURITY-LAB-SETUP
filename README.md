@@ -79,12 +79,12 @@ Additional target machines can be added to the same virtual network in future pr
 
 | 🧩 Component       | ⚙️ Configuration   |
 | ------------------ | ------------------  |
-| 🖥️ Host OS         | Windows 10         |
+| 🖥️ Host OS         | Windows 11         |
 | 🧠 Host RAM        | 8 GB               |
-| ⚡ Processor       | Intel Core i7      |
-| 🧰 Hypervisor      | VirtualBox 7.2  |
+| ⚡ Processor       | Intel Core i5      |
+| 🧰 Hypervisor      | VirtualBox 7.2.22  |
 | 🐉 Security OS     | Kali Linux 2026.2  |
-| 🧠 Kali RAM        | 2048 MB            |
+| 🧠 Kali RAM        | 4048 MB            |
 | 🌐 Virtual Network | NAT Network        |
 | 📡 Network Address | 10.0.0.0/24        |
 | 🐧 Kali IP Address | 10.0.0.2/24        |
@@ -96,12 +96,18 @@ Additional target machines can be added to the same virtual network in future pr
 
 # 🪜 Lab Setup Procedure
 
-## Step 1. Install 7-Zip
+## Step 1. Download ISO files for VMS(Kali,W7,W10 & Android x86)
+The Virtual Machines was ISO files was Downloaded include as per below links,
 
-7-Zip was installed to extract the Kali Linux virtual-machine package, which may be distributed as a `.7z` archive.
+  1.Kali https://cdimage.kali.org/kali-2026.3/kali-linux-2026.3-installer-amd64.iso
+  
+  2.Windows 10 https://www.microsoft.com/en-gb/software-download/windows10ISO
+  
+  3.Windows 7 https://getmyos.com/windows-7-multi-edition-checked-build-32-64-bit
+  
+  4.Android x86 https://www.fosshub.com/Android-x86.html
 
-**Tool:** 7-Zip
-
+Note: Some Iso images are unofficial and can be used for lab preparation only do not use it on live Enterprise systems
 ---
 
 ## Step 2. Install VirtualBox
@@ -120,7 +126,7 @@ IPv4 Prefix:  10.0.0.0/24
 DHCP:         Enabled
 IPv6:         Disabled
 
-![](2-screenshot-network-settings-1.png)
+<img width="959" height="539" alt="1 Screenshot-Virtual Box Network Config" src="https://github.com/user-attachments/assets/3f7faf74-d177-487d-b606-cebcac5f53ec" />
 
 A **NAT Network** was selected because multiple virtual machines connected to the same NAT Network can communicate with one another while also having outbound network connectivity.
 
@@ -129,9 +135,9 @@ This will allow future attacker and target VMs to communicate within the lab.
 
 ---
 
-## Step 4. Import Kali Linux
+## Step 4. Install Kali Linux
 
-The Kali Linux virtual machine was downloaded from the official Kali Linux website and imported into VirtualBox.
+The Kali Linux virtual machine was downloaded from the official Kali Linux website and iinstalled VirtualBox.
 
 The VM network adapter was configured as follows:
 
@@ -145,9 +151,10 @@ Adapter Type: Intel PRO/1000 MT Desktop
 The VM was allocated:
 
 ```text
-RAM: 2048 MB
+RAM: 4048 MB
 ```
-![](3-screenshot-kali-linux.png)
+<img width="959" height="539" alt="Kali VM" src="https://github.com/user-attachments/assets/6b045076-7b66-49ca-ad9f-dfd6326629f2" />
+
 A shared folder was also configured for transferring required files between the host operating system and the Kali VM.
 
 
@@ -169,63 +176,73 @@ DNS: 8.8.8.8
 
 A consistent IP address makes it easier to document the lab and reference the Kali machine in future exercises.
 
-![](4-screenshot-kali-network-settings.png)
+<img width="959" height="504" alt="2 Screenshot-Kali-VM Ip configuration" src="https://github.com/user-attachments/assets/23a3f120-c7e6-4882-88ff-2827210d6dbc" />
+
 
 ---
 
-## Step 6. Create a Clean VM Snapshot
+## Step 7. Create  windows 10 VM 
 
-After completing the initial configuration, a VirtualBox snapshot was created.
-
-Example snapshot name:
+After Completing installation of Kali VM creation of another VM windows 10 was done using the ISO method and configured as per requirement with the Network Ip configuration as below,
 
 ```text
-Clean Kali - Network Setup
+IP Address: 10.0.0.10
+Subnet Mask: 255.255.255.0
+Gateway: 10.0.0.1
+DNS: 8.8.8.8
 ```
+<img width="959" height="503" alt="3 Screenshot-W10 VM ipconfiguration" src="https://github.com/user-attachments/assets/05051d6a-04c2-42d8-90f7-b8fbb7fdc446" />
 
-The snapshot represents the clean baseline of the laboratory.
+## Step 8. Create  windows 7 VM (Optional)
 
-If a future exercise changes or damages the VM configuration, the machine can be restored to this baseline.
+After Completing installation of W10 VM creation of another VM windows 7 was done using the ISO method and configured as per requirement with the Network Ip configuration as below,
 
+```text
+IP Address: 10.0.0.7
+Subnet Mask: 255.255.255.0
+Gateway: 10.0.0.1
+DNS: 8.8.8.8
+```
+<img width="959" height="505" alt="4 Screenshot-W7 VM ip config" src="https://github.com/user-attachments/assets/98e7d55e-eaed-4193-ad96-97d697848bb5" />
 
----
+## Step 9. Create  Android x86 VM (Optional)
+After Completing installation of W7 VM creation of another VM Android x86 was done using the ISO method and configured as per requirement with the Network Ip configuration as below,
+
+```text
+IP Address: 10.0.0.9
+Subnet Mask: 255.255.255.0
+Gateway: 10.0.0.1
+DNS: 8.8.8.8
+```
+<img width="958" height="503" alt="5 Screenshot Android IP config" src="https://github.com/user-attachments/assets/64cec766-61fe-4431-9144-14547ba5896c" />
 
 # 🔎 Lab Verification
+The test of pinging across all VMs were conducted the result was as follows
 
-| ✅ Test                        | 🧾 Command                      | 🎯 Expected Result              |
-| ----------------------------- | ------------------------------- | ------------------------------- |
-| 🌐 Check IP address           | `ip a`                          | Correct Kali IP displayed       |
-| 📡 Test gateway               | `ping 10.0.0.1`                 | Successful replies              |
-| 🌍 Test Internet connectivity | `ping 8.8.8.8`                  | Successful replies              |
-| 🔎 Test DNS resolution        | `nslookup networkwalks.com`     | Domain resolves                 |
-| 🧰 Verify Nmap                | `nmap --version`                | Nmap version displayed          |
-| 🔄 Verify snapshot            | Restore snapshot and run `ip a` | Baseline configuration restored |
+# 🔎 Pinging on kali to windows 10 (10.0.0.10) and Google DNS 
+Result Screenshot (Succsessfully)
+<img width="959" height="505" alt="6 Screenshot-Kali VM Ping Windows VM" src="https://github.com/user-attachments/assets/8ae2ee5d-5825-4137-a151-7e453099a005" />
 
-### Example Results
+# 🔎 Pinging on  windows 10 to kali (10.0.0.2) and Google DNS 
+Result Screenshot (Succsessfully)
+<img width="959" height="504" alt="8 Screenshot-W10 VM ping Kali VM   Google DNS" src="https://github.com/user-attachments/assets/4a837e85-4927-4fd2-a9ac-22534d38aad4" />
 
-```text
-IP Address:
-10.0.0.2/24
+# 🔎 Pinging on  windows 7 to both kali (10.0.0.2), W10 (10.0.0.10)  and Google DNS 
+Result Screenshot (Succsessfully)
+<img width="959" height="504" alt="9 Screenshot-W7 VM ping other VM" src="https://github.com/user-attachments/assets/c6ac1e3b-a39e-4091-8747-38178638ddb7" />
 
-Gateway:
-10.0.0.1
+# 🔎 Pinging on  Android x86 to both kali (10.0.0.2) and Google DNS 
+Result Screenshot (Succsessfully)
+<img width="959" height="502" alt="10 Screenshot Android ping to kali" src="https://github.com/user-attachments/assets/18903bfc-81f1-4b78-9cf8-6ea8a4b2fe27" />
 
-DNS:
-8.8.8.8
-```
-
----
 
 # 🐞 Problems Encountered & Solutions
 
 Documenting problems is an important part of the project.
 
-## Problem 1. Internet Connectivity After Static IP Configuration
+## Problem 1. Pinging from Other VMS (Kali, Android) to Windows 10 VM fail
 
-After manually configuring the IPv4 settings, Internet connectivity may fail depending on the Kali/NetworkManager configuration.
-
-One workaround used during this lab was:
-
+After manually configuring the IPv4 settings, at first 
 ```bash
 sudo nmcli connection modify "Wired connection 1" ipv4.dad-timeout 0
 ```
