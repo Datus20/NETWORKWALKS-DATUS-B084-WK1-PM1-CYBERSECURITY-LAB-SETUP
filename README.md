@@ -69,8 +69,7 @@ It can be used for activities such as:
 ---
 
 ## 🏗️ Lab Architecture
-1.Screenshot-Virtual Box Network Config.png
-
+<img width="959" height="539" alt="11 Screenshot All VMS" src="https://github.com/user-attachments/assets/38f6070e-506d-460a-b3e1-438ec515eb4c" />
 
 Additional target machines can be added to the same virtual network in future projects.
 
