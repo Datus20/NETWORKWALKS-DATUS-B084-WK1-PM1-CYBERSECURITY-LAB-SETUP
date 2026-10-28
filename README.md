@@ -243,30 +243,17 @@ Documenting problems is an important part of the project.
 ## Problem 1. Pinging from Other VMS (Kali, Android) to Windows 10 VM fail
 
 After manually configuring the IPv4 settings, at first pinging to windows 10 VM was fail which was due to the issue that by default windows 10  ICMP echoes was set to be disable on the (Windows Defender Firewall with  Advance security)  
+Log into your Windows VM.
+1. Open the Start Menu, type wf.msc, and press Enter to open Windows Defender Firewall with Advanced Security.
+   
+2. Click on Inbound Rules in the left sidebar.
+   
+3. Scroll down to find the rule named: File and Printer Sharing (Echo Request - ICMPv4-In).
+   
+Note: There may be multiple profiles (Public, Private, Domain). Look for the one matching your current network profile, or enable both. 
+Right-click the rule and select Enable Rule.
 
-The network connection was then restarted/rebooted and connectivity was tested again.
-
-> **Important:** Network interface and connection names may differ between systems. Students should first identify their actual connection name before running an `nmcli` command.
-
----
-
-## Problem 2. VirtualBox VT-x / Virtualization Error
-
-The VM initially failed to start because hardware virtualization was disabled in the system firmware/BIOS.
-
-The issue was resolved by:
-
-1. Restarting the computer.
-2. Entering BIOS/UEFI settings.
-3. Enabling Intel VT-x / hardware virtualization.
-4. Saving the configuration.
-5. Restarting the computer.
-6. Starting the Kali VM again.
-
-After enabling virtualization, the VM started successfully.
-
-
----
+The network connection was then restarted/rebooted and connectivity was tested again and working ok.
 
 # 💡 What I Learned
 
@@ -286,16 +273,6 @@ This makes it useful for building a multi-machine cybersecurity laboratory.
 
 I learned how VirtualBox virtual network adapters connect virtual machines to different types of networks and how network configuration affects communication between machines.
 
-### 3. Static IP Configuration
-
-I learned how to configure and verify IPv4 addressing, subnet masks, gateways, and DNS settings in Kali Linux.
-
-### 4. VM Snapshots
-
-I learned that a clean snapshot should be created **before performing risky or experimental activities**.
-
-This provides a known-good recovery point for future cybersecurity exercises.
-
 ### 5. Documentation
 
 I learned that documenting commands, configuration, screenshots, problems, and solutions is an important part of a professional cybersecurity project.
@@ -310,19 +287,18 @@ This laboratory is intended strictly for education purposes only.
 
 # 🔗 Tools & Resources
 
-- **7-Zip:** [https://7-zip.org/download.html](https://7-zip.org/download.html)
 - **VirtualBox:** [https://virtualbox.org/wiki/Downloads](https://virtualbox.org/wiki/Downloads)
-- **Kali Linux:** [https://kali.org/get-kali](https://kali.org/get-kali)
-
+- **Kali Linux:** [https://cdimage.kali.org/kali-2026.3/kali-linux-2026.3-installer-amd64.iso))
+- **Windows 10:** [https://www.microsoft.com/en-gb/software-download/windows10ISO 
+- **Windows 7:** [https://getmyos.com/windows-7-multi-edition-checked-build-32-64-bit
+- **Android x86:** [https://www.fosshub.com/Android-x86.html
 ---
 
 # 👤 Author
 
-**Waqas Karim**\
-Cybersecurity Professional B082
+**Datus Ekwabi**\
 
-LinkedIn: [https://www.linkedin.com/in/waqaskarim/](https://www.linkedin.com/in/waqaskarim/)
-
+LinkedIn: [www.linkedin.com/in/datus-ekwabi-43b622173
 ---
 
 ## 📌 Project Information
